@@ -21,13 +21,5 @@ public class Plane extends Object3D{
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
-	public int getMaterial_index() {
-		return material_index;
-	}
-	public void setMaterial_index(int material_index) {
-		this.material_index = material_index;
-	}
-	
-
 	
 }

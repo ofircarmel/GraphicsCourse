@@ -2,12 +2,12 @@ package RayTracing;
 
 
 public class Light {
-	private Point_old position;
-	private Point_old color;
+	private Point3D position;
+	private Color color;
 	private float specular_intensity;
 	private float shadow_intensity;
 	private float radius;
-	public Light(Point_old position, Point_old color, float specular_intensity, float shadow_intensity, float radius) {
+	public Light(Point3D position, Color color, float specular_intensity, float shadow_intensity, float radius) {
 		super();
 		this.position = position;
 		this.color = color;
@@ -15,16 +15,16 @@ public class Light {
 		this.shadow_intensity = shadow_intensity;
 		this.radius = radius;
 	}
-	public Point_old getPosition() {
+	public Point3D getPosition() {
 		return position;
 	}
-	public void setPosition(Point_old position) {
+	public void setPosition(Point3D position) {
 		this.position = position;
 	}
-	public Point_old getColor() {
+	public Color getColor() {
 		return color;
 	}
-	public void setColor(Point_old color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 	public float getSpecular_intensity() {
@@ -45,6 +45,6 @@ public class Light {
 	public void setRadius(float radius) {
 		this.radius = radius;
 	}
-
+	
 
 }
