@@ -12,8 +12,7 @@ public class Camera {
 	private int max_recursion_level;
 	
 	
-	public Camera(Point3D position, Point3D look_at_point, Vector3D up_vector, float screen_distance,
-			float screen_width) {
+	public Camera(Point3D position, Point3D look_at_point, Vector3D up_vector, float screen_distance,float screen_width) {
 		super();
 		this.position = position;
 		this.look_at_point = look_at_point;
@@ -22,6 +21,7 @@ public class Camera {
 		this.screen_width = screen_width;
 
 	}
+
 
 
 	public Point3D getPosition() {

@@ -11,6 +11,10 @@ public class Tuple3D implements Vector3D,Point3D{
 	public Tuple3D(double x, double y, double z) {
 		set(x,y,z);
 	}
+	
+	public Tuple3D(String xStr, String yStr, String zStr) {
+		this(Double.parseDouble(xStr),Double.parseDouble(yStr),Double.parseDouble(zStr));
+	}
 	public Tuple3D(Vector3D other) {
 		this(other.getX(),other.getY(),other.getZ());
 	}

@@ -11,6 +11,10 @@ public class Color {
 		B_VAL=b%256;
 	}
 
+	public Color(String rStr,String gStr,String bStr){
+		this(Integer.parseInt(rStr),Integer.parseInt(gStr),Integer.parseInt(bStr));
+	}
+	
 	public Color(Color c){
 		this(c.R_VAL,c.G_VAL,c.G_VAL);
 	}

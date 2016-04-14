@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -19,6 +20,7 @@ public class RayTracer {
 
 	public int imageWidth;
 	public int imageHeight;
+	public Scene thisScene;
 
 	/**
 	 * Runs the ray tracer. Takes scene file, output image file and image size as input.
@@ -74,8 +76,16 @@ public class RayTracer {
 		String line = null;
 		int lineNum = 0;
 		System.out.println("Started parsing scene file " + sceneFileName);
-
-
+		String[] newArray;
+		
+		
+		Camera cam =null;
+		Settings set = null;
+		
+		List <Material> mtl = new ArrayList<Material>();
+		List<Light> lgt = new ArrayList<Light>();
+		
+		List <Object3D> objects = new ArrayList<Object3D>();		
 
 		while ((line = r.readLine()) != null)
 		{
@@ -94,19 +104,49 @@ public class RayTracer {
 
 				if (code.equals("cam"))
 				{
-                                        // Add code here to parse camera parameters
+                    // Add code here to parse camera parameters
 
+					
+					Point3D position = new Tuple3D(params[0],params[1],params[2]);
+					
+					Point3D look_at_point = new Tuple3D(params[3],params[4],params[5]);
+					
+					Vector3D up_vector = new Tuple3D(params[6],params[7],params[8]);
+					
+					int screen_dist = Integer.parseInt(params[9]);
+					int screen_width = Integer.parseInt(params[10]);	
+
+					cam = new Camera(position,look_at_point,up_vector,screen_dist,screen_width);
+					
 					System.out.println(String.format("Parsed camera parameters (line %d)", lineNum));
 				}
 				else if (code.equals("set"))
 				{
                                         // Add code here to parse general settings parameters
+					newArray = Arrays.copyOfRange(params, 0, 3);
+					Color background_col = new Color(params[0],params[1],params[2]);
+					int root_num_shadow_rays = Integer.parseInt(params[3]);
+					int max_num_recurs = Integer.parseInt(params[3]);
+					set = new Settings(background_col,root_num_shadow_rays,max_num_recurs);
 
 					System.out.println(String.format("Parsed general settings (line %d)", lineNum));
 				}
 				else if (code.equals("mtl"))
 				{
                                         // Add code here to parse material parameters
+					
+					Color diffuse_col = new Color(params[0],params[1],params[2]);
+					
+					Color specular_col = new Color(params[3],params[4],params[5]);
+
+					Color reflection_col = new Color(params[6],params[7],params[8]);
+					
+					float phong_specular_coeff = Float.parseFloat(params[9]);
+					float transparency = Float.parseFloat(params[10]);
+					
+					Material tmp = new Material(diffuse_col, specular_col, phong_specular_coeff, reflection_col, transparency);
+					mtl.add(tmp);
+				
 
 					System.out.println(String.format("Parsed material (line %d)", lineNum));
 				}
@@ -119,24 +159,60 @@ public class RayTracer {
                                         // sphere.setCenter(params[0], params[1], params[2]);
                                         // sphere.setRadius(params[3]);
                                         // sphere.setMaterial(params[4]);
+					
+					
+					Point3D position = new Tuple3D(params[0],params[1],params[2]);
+					double raduis = Double.parseDouble(params[3]);
+					
+					int material_index = Integer.parseInt(params[4]);
+					
+					objects.add(new Sphere(position, raduis, material_index));
 
 					System.out.println(String.format("Parsed sphere (line %d)", lineNum));
 				}
 				else if (code.equals("pln"))
 				{
                                         // Add code here to parse plane parameters
-
+					Vector3D normal = new Tuple3D(params[0],params[1],params[2]);
+					int offset = Integer.parseInt(params[3]);
+					int material_index = Integer.parseInt(params[4]);
+					
+					objects.add(new Plane(normal, offset, material_index));
+					
 					System.out.println(String.format("Parsed plane (line %d)", lineNum));
 				}
 				else if (code.equals("cyl"))
 				{
                                         // Add code here to parse cylinder parameters
+					
+					Point3D position = new Tuple3D(params[0],params[1],params[2]);
+					double length = Double.parseDouble(params[3]);
+					double radius = Double.parseDouble(params[4]);
+					
+					Vector3D rotation = new Tuple3D(params[5],params[6],params[7]);
+					int material_index = Integer.parseInt(params[8]);
+					
+					objects.add(new Cylinder(position, length, radius, rotation, material_index));
 
 					System.out.println(String.format("Parsed cylinder (line %d)", lineNum));
 				}
 				else if (code.equals("lgt"))
 				{
                                         // Add code here to parse light parameters
+					
+					Point3D position = new Tuple3D(params[0],params[1],params[2]);
+					Color color = new Color(params[3],params[4],params[5]);
+					
+					float specular_intensity = Float.parseFloat(params[6]);
+					float shadow_intensity = Float.parseFloat(params[7]);
+					float radius = Float.parseFloat(params[8]);
+					
+					lgt.add(new Light(position, color, specular_intensity, shadow_intensity, radius));
+
+					
+
+
+					
 
 					System.out.println(String.format("Parsed light (line %d)", lineNum));
 				}
@@ -151,6 +227,14 @@ public class RayTracer {
                 // for example camera settings and all necessary materials were defined.
 
 		System.out.println("Finished parsing scene file " + sceneFileName);
+		
+		if(cam==null){
+			throw new RuntimeException("Error: no camera specification found");
+		}
+		if(set==null){	
+			throw new RuntimeException("Error: no settings found");
+		}
+		thisScene = new Scene(cam, set, mtl, objects, lgt);
 
 	}
 
