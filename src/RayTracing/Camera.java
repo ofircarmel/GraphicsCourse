@@ -2,9 +2,9 @@ package RayTracing;
 
 
 public class Camera {
-	private Point position;
-	private Point look_at_point;
-	private Point up_vector;
+	private Point_old position;
+	private Point_old look_at_point;
+	private Point_old up_vector;
 	private float screen_distance;
 	private float screen_width;
 	private double background_col;
@@ -14,7 +14,7 @@ public class Camera {
 	public Camera() {
 		super();
 	}
-	public Camera(Point position, Point look_at_point, Point up_vector, float screen_distance,
+	public Camera(Point_old position, Point_old look_at_point, Point_old up_vector, float screen_distance,
 			float screen_width) {
 		super();
 		this.position = position;
@@ -24,22 +24,22 @@ public class Camera {
 		this.screen_width = screen_width;
 
 	}
-	public Point getPosition() {
+	public Point_old getPosition() {
 		return position;
 	}
-	public void setPosition(Point position) {
+	public void setPosition(Point_old position) {
 		this.position = position;
 	}
-	public Point getLook_at_point() {
+	public Point_old getLook_at_point() {
 		return look_at_point;
 	}
-	public void setLook_at_point(Point look_at_point) {
+	public void setLook_at_point(Point_old look_at_point) {
 		this.look_at_point = look_at_point;
 	}
-	public Point getUp_vector() {
+	public Point_old getUp_vector() {
 		return up_vector;
 	}
-	public void setUp_vector(Point up_vector) {
+	public void setUp_vector(Point_old up_vector) {
 		this.up_vector = up_vector;
 	}
 	public float getScreen_distance() {

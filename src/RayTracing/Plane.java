@@ -1,19 +1,18 @@
 package RayTracing;
 
-public class Plane {
-	private Point normal;
+public class Plane extends Object3D{
+	private Point_old normal;
 	private int offset;
-	private int material_index;
-	public Plane(Point normal, int offset, int material_index) {
-		super();
+	
+	public Plane(Point_old normal, int offset, int material_index) {
+		super(material_index);
 		this.normal = normal;
-		this.offset = offset;
-		this.material_index = material_index;
+		this.offset = offset;	
 	}
-	public Point getNormal() {
+	public Point_old getNormal() {
 		return normal;
 	}
-	public void setNormal(Point normal) {
+	public void setNormal(Point_old normal) {
 		this.normal = normal;
 	}
 	public int getOffset() {

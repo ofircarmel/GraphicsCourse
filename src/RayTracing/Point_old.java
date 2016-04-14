@@ -1,18 +1,18 @@
 package RayTracing;
 //http://introcs.cs.princeton.edu/java/34nbody/Vector.java.html
-public class Point {
+public class Point_old {
 
     private final int N;         // length of the vector
     private double[] data;       // array of vector's components
 
     // create the zero vector of length N
-    public Point(int N) {
+    public Point_old(int N) {
         this.N = N;
         this.data = new double[N];
     }
 
     // create a vector from an array
-    public Point(double[] data) {
+    public Point_old(double[] data) {
         N = data.length;
 
         // defensive copy so that client can't alter our copy of data[]
@@ -20,7 +20,7 @@ public class Point {
         for (int i = 0; i < N; i++)
             this.data[i] = data[i];
     }
-    public Point(String[] data){
+    public Point_old(String[] data){
         N = data.length;
         this.data = new double[N];
 		for (int i = 0; i < N; i++) {
@@ -37,7 +37,7 @@ public class Point {
     }
 
     // return the inner product of this vector a and b
-    public double dot(Point that) {
+    public double dot(Point_old that) {
         if (this.length() != that.length()) throw new RuntimeException("Dimensions don't agree");
         double sum = 0.0;
         for (int i = 0; i < N; i++)
@@ -51,24 +51,24 @@ public class Point {
     }
 
     // return the Euclidean distance between this and that
-    public double distanceTo(Point that) {
+    public double distanceTo(Point_old that) {
         if (this.length() != that.length()) throw new RuntimeException("Dimensions don't agree");
         return this.minus(that).magnitude();
     }
 
     // return this + that
-    public Point plus(Point that) {
+    public Point_old plus(Point_old that) {
         if (this.length() != that.length()) throw new RuntimeException("Dimensions don't agree");
-        Point c = new Point(N);
+        Point_old c = new Point_old(N);
         for (int i = 0; i < N; i++)
             c.data[i] = this.data[i] + that.data[i];
         return c;
     }
 
     // return this - that
-    public Point minus(Point that) {
+    public Point_old minus(Point_old that) {
         if (this.length() != that.length()) throw new RuntimeException("Dimensions don't agree");
-        Point c = new Point(N);
+        Point_old c = new Point_old(N);
         for (int i = 0; i < N; i++)
             c.data[i] = this.data[i] - that.data[i];
         return c;
@@ -80,8 +80,8 @@ public class Point {
     }
 
     // create and return a new object whose value is (this * factor)
-    public Point times(double factor) {
-        Point c = new Point(N);
+    public Point_old times(double factor) {
+        Point_old c = new Point_old(N);
         for (int i = 0; i < N; i++)
             c.data[i] = factor * data[i];
         return c;
@@ -89,7 +89,7 @@ public class Point {
 
 
     // return the corresponding unit vector
-    public Point direction() {
+    public Point_old direction() {
         if (this.magnitude() == 0.0) throw new RuntimeException("Zero-vector has no direction");
         return this.times(1.0 / this.magnitude());
     }

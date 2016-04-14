@@ -1,14 +1,14 @@
 package RayTracing;
 
 public class Settings {
-	private Point backgrouad_col;
+	private Point_old backgrouad_col;
 	private int root_num_shadow_rays;
 	private int max_num_recurstion;
 	
-	public Point getBackgrouad_col() {
+	public Point_old getBackgrouad_col() {
 		return backgrouad_col;
 	}
-	public void setBackgrouad_col(Point backgrouad_col) {
+	public void setBackgrouad_col(Point_old backgrouad_col) {
 		this.backgrouad_col = backgrouad_col;
 	}
 	public int getroot_root_root_num_shadow_rays() {
@@ -23,7 +23,7 @@ public class Settings {
 	public void setMax_num_recurstion(int max_num_recurstion) {
 		this.max_num_recurstion = max_num_recurstion;
 	}
-	public Settings(Point backgrouad_col, int root_num_shadow_rays, int max_num_recurstion) {
+	public Settings(Point_old backgrouad_col, int root_num_shadow_rays, int max_num_recurstion) {
 		super();
 		this.backgrouad_col = backgrouad_col;
 		this.root_num_shadow_rays = root_num_shadow_rays;

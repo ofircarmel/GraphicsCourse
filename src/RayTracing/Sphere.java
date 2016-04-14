@@ -1,21 +1,24 @@
 package RayTracing;
 
 
-public class Sphere {
+public class Sphere extends Object3D{
 
-	private Point position;
+	private Point_old position;
 	private double raduis;
-	private int material_index;
-	public Sphere(Point position, double raduis, int material_index) {
-		super();
+	
+	
+
+	
+	public Sphere(Point_old position, double raduis, int material_index) {
+		super(material_index);
 		this.position = position;
 		this.raduis = raduis;
-		this.material_index = material_index;
+
 	}
-	public Point getPosition() {
+	public Point_old getPosition() {
 		return position;
 	}
-	public void setPosition(Point position) {
+	public void setPosition(Point_old position) {
 		this.position = position;
 	}
 	public double getRaduis() {

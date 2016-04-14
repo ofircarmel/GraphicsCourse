@@ -1,33 +1,26 @@
 package RayTracing;
 
-public class Cylinder {
-	private Point position;
+public class Cylinder extends Object3D{
+	private Point3D position;
 	private double length;
 	private double radius;
-	private Point rotation;
-	private int material_index;
+	private Vector3D rotation;
 	
-	public int getMaterial_index() {
-		return material_index;
-	}
+	
 
-	public void setMaterial_index(int material_index) {
-		this.material_index = material_index;
-	}
-
-	public Cylinder(Point position, double length, double radius, Point rotation, int material_index) {
-		super();
+	public Cylinder(Point3D position, double length, double radius, Vector3D rotation, int material_index) {
+		super(material_index);
 		this.position = position;
 		this.length = length;
 		this.radius = radius;
 		this.rotation = rotation;
-		this.material_index = material_index;
+		
 	}
 	
-	public Point getPosition() {
+	public Point3D getPosition() {
 		return position;
 	}
-	public void setPosition(Point position) {
+	public void setPosition(Point3D position) {
 		this.position = position;
 	}
 	public double getLength() {
@@ -42,10 +35,10 @@ public class Cylinder {
 	public void setRadius(double radius) {
 		this.radius = radius;
 	}
-	public Point getRotation() {
+	public Vector3D getRotation() {
 		return rotation;
 	}
-	public void setRotation(Point rotation) {
+	public void setRotation(Vector3D rotation) {
 		this.rotation = rotation;
 	}
 }
